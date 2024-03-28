@@ -3,9 +3,11 @@ import React from "react";
 
 const { width, height } = Dimensions.get("window");
 
-export const CharacterCard = ({ navigate, item }) => {
+export const CharacterCard = ({ navigation, item }) => {
   return (
-    <TouchableOpacity onPress={() => {}}>
+    <TouchableOpacity
+      onPress={() => navigation.navigate("Character", { item })}
+    >
       <View
         style={{
           backgroundColor: "rgb(32, 35, 41)",
@@ -80,7 +82,9 @@ export const CharacterCard = ({ navigate, item }) => {
               </Text>
             </View>
             <View>
-              <Text style={{ color: "gray", fontSize: 16 }}>First seen in:</Text>
+              <Text style={{ color: "gray", fontSize: 16 }}>
+                First seen in:
+              </Text>
               {/* TODO: Закончить отображение в эпизоде */}
             </View>
           </View>

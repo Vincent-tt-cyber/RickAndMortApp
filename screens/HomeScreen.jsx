@@ -13,7 +13,7 @@ import { CharacterCard } from "../components/CharacterCard";
 
 const { width, height } = Dimensions.get("window");
 
-export const HomeScreen = () => {
+export const HomeScreen = ({ navigation }) => {
   const [episodes, setEpisodes] = React.useState([]);
   const [refresh, setRefresh] = React.useState(false);
 
@@ -62,7 +62,9 @@ export const HomeScreen = () => {
         </View>
         <FlatList
           data={episodes}
-          renderItem={({ item }) => <CharacterCard item={item} />}
+          renderItem={({ item }) => (
+            <CharacterCard item={item} navigation={navigation} />
+          )}
           keyExtractor={(item) => item.id}
         />
       </ScrollView>
