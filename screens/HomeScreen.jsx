@@ -6,8 +6,11 @@ import {
   FlatList,
   Dimensions,
   RefreshControl,
+<<<<<<< HEAD
   ActivityIndicator,
   Button,
+=======
+>>>>>>> 99f3d9144d3f50d2ae8ca63e9b0d3d11ce80197c
 } from "react-native";
 import React from "react";
 import axios from "axios";
@@ -17,6 +20,7 @@ const { width, height } = Dimensions.get("window");
 
 export const HomeScreen = ({ navigation }) => {
   const [episodes, setEpisodes] = React.useState([]);
+<<<<<<< HEAD
   const [page, setPage] = React.useState(1);
   const [isLoadig, setIsLoadig] = React.useState(true);
 
@@ -35,15 +39,47 @@ export const HomeScreen = ({ navigation }) => {
   const loadMore = () => {
     setPage(page + 1);
     console.log(page);
+=======
+  const [refresh, setRefresh] = React.useState(false);
+
+  const getEpisodes = () => {
+    if (episodes.length == 0) {
+      axios
+        .get("https://rickandmortyapi.com/api/character")
+        .then(({ data }) => {
+          setEpisodes(data.results);
+        });
+    }
+  };
+
+  const pullMe = () => {
+    setRefresh(true);
+
+    setTimeout(() => {
+      setRefresh(false);
+    }, 1000);
+>>>>>>> 99f3d9144d3f50d2ae8ca63e9b0d3d11ce80197c
   };
 
   React.useEffect(() => {
     getEpisodes();
+<<<<<<< HEAD
   }, [page]);
 
   return (
     <SafeAreaView>
       <ScrollView>
+=======
+  }, []);
+
+  return (
+    <SafeAreaView>
+      <ScrollView
+        refreshControl={
+          <RefreshControl refreshing={refresh} onRefresh={() => pullMe()} />
+        }
+      >
+>>>>>>> 99f3d9144d3f50d2ae8ca63e9b0d3d11ce80197c
         <View
           style={{
             width,
@@ -58,6 +94,7 @@ export const HomeScreen = ({ navigation }) => {
             The Rick and Morty API
           </Text>
         </View>
+<<<<<<< HEAD
         {isLoadig ? (
           <View
             style={{
@@ -83,6 +120,15 @@ export const HomeScreen = ({ navigation }) => {
             <Button title="Load more" onPress={() => loadMore()} />
           </View>
         )}
+=======
+        <FlatList
+          data={episodes}
+          renderItem={({ item }) => (
+            <CharacterCard item={item} navigation={navigation} />
+          )}
+          keyExtractor={(item) => item.id}
+        />
+>>>>>>> 99f3d9144d3f50d2ae8ca63e9b0d3d11ce80197c
       </ScrollView>
     </SafeAreaView>
   );
