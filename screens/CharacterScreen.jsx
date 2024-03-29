@@ -18,6 +18,7 @@ export const CharacterScreen = ({ route, navigate }) => {
   const { item } = route.params;
 
   const getEpisodes = () => {
+    // sdjfjksdhfjksdf
     // console.log("Запрос на эпизоды");
 
     axios.get("https://rickandmortyapi.com/api/episode").then(({ data }) => {
