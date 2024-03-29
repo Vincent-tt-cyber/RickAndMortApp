@@ -19,7 +19,7 @@ const { width, height } = Dimensions.get("window");
 
 export const CharacterScreen = ({ route, navigate }) => {
   const [episodes, setEpisodes] = React.useState([]);
-<<<<<<< HEAD
+
   const [isLoadig, setIsLoadig] = React.useState(true);
   const { item } = route.params;
 
@@ -34,7 +34,7 @@ export const CharacterScreen = ({ route, navigate }) => {
           setEpisodes((prevObj) => [...prevObj, newEpisode]);
         })
         .finally(() => setIsLoadig(false));
-=======
+
   const { item } = route.params;
 
   const getEpisodes = () => {
@@ -44,16 +44,12 @@ export const CharacterScreen = ({ route, navigate }) => {
     axios.get("https://rickandmortyapi.com/api/episode").then(({ data }) => {
       // console.log("Эпизоды =======> ", data.results);
       setEpisodes(data.results);
->>>>>>> 99f3d9144d3f50d2ae8ca63e9b0d3d11ce80197c
     });
   };
 
   React.useEffect(() => {
-<<<<<<< HEAD
     getEpisodes(item.episode);
-=======
     getEpisodes();
->>>>>>> 99f3d9144d3f50d2ae8ca63e9b0d3d11ce80197c
   }, []);
 
   return (
