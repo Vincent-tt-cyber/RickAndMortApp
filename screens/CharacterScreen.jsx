@@ -1,5 +1,6 @@
 import {
   Dimensions,
+  FlatList,
   Image,
   SafeAreaView,
   ScrollView,
@@ -7,11 +8,28 @@ import {
   View,
 } from "react-native";
 import React from "react";
+import axios from "axios";
+import { EpisodeCard } from "../components/EpisodeCard";
 
 const { width, height } = Dimensions.get("window");
 
 export const CharacterScreen = ({ route, navigate }) => {
+  const [episodes, setEpisodes] = React.useState([]);
   const { item } = route.params;
+
+  const getEpisodes = () => {
+    // console.log("Запрос на эпизоды");
+
+    axios.get("https://rickandmortyapi.com/api/episode").then(({ data }) => {
+      // console.log("Эпизоды =======> ", data.results);
+      setEpisodes(data.results);
+    });
+  };
+
+  React.useEffect(() => {
+    getEpisodes();
+  }, []);
+
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: "rgb(32, 35, 41)" }}>
       <ScrollView contentContainerStyle={{ paddingHorizontal: 10 }}>
@@ -42,7 +60,7 @@ export const CharacterScreen = ({ route, navigate }) => {
                 color: "#fff",
                 fontWeight: "900",
                 textAlign: "center",
-                paddingTop: 20,
+                paddingTop: 10,
               }}
             >
               {item.name.length > 30
@@ -77,7 +95,49 @@ export const CharacterScreen = ({ route, navigate }) => {
                 {item.status} - {item.species}
               </Text>
             </View>
+            <View style={{ marginBottom: 10 }}>
+              <Text
+                style={{ color: "gray", fontSize: 16, textAlign: "center" }}
+              >
+                Last known location:
+              </Text>
+              <Text
+                style={{
+                  fontSize: 16,
+                  fontWeight: "900",
+                  color: "#fff",
+                  textAlign: "center",
+                }}
+              >
+                {item.location.name.length > 20
+                  ? item.location.name.slice(0, 20) + "..."
+                  : item.location.name}
+              </Text>
+            </View>
+            <View style={{ paddingBottom: 10 }}>
+              <Text
+                style={{ color: "gray", fontSize: 16, textAlign: "center" }}
+              >
+                Gender:
+              </Text>
+              <Text
+                style={{
+                  fontSize: 16,
+                  fontWeight: "900",
+                  color: "#fff",
+                  textAlign: "center",
+                }}
+              >
+                {item.gender}
+              </Text>
+            </View>
           </View>
+        </View>
+        <View style={{ paddingVertical: 10 }}>
+          <FlatList
+            data={episodes}
+            renderItem={({ item }) => <EpisodeCard item={item} />}
+          />
         </View>
       </ScrollView>
     </SafeAreaView>

@@ -17,7 +17,7 @@ export const CharacterCard = ({ navigation, item }) => {
           // paddingVertical: 10,
           flexDirection: "row",
           // justifyContent: "space-between",
-          height: height * 0.3,
+          height: height * 0.22,
           overflow: "hidden",
         }}
       >
@@ -82,10 +82,10 @@ export const CharacterCard = ({ navigation, item }) => {
               </Text>
             </View>
             <View>
-              <Text style={{ color: "gray", fontSize: 16 }}>
-                First seen in:
+              <Text style={{ color: "gray", fontSize: 16 }}>Gender:</Text>
+              <Text style={{ fontSize: 16, fontWeight: "900", color: "#fff" }}>
+                {item.gender}
               </Text>
-              {/* TODO: Закончить отображение в эпизоде */}
             </View>
           </View>
         </View>
